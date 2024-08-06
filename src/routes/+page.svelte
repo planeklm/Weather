@@ -18,6 +18,12 @@
    */
   let error = null;
 
+  // Your existing script code here
+  const websiteTitle = "Your Website Title";
+  const websiteDescription = "A brief description of your website";
+  const imageUrl = "https://files.catbox.moe/4uk5s9.png";
+  const themeColor = "#HEX_COLOR";
+
   const countries = [
     "US",
     "CA",
@@ -320,6 +326,15 @@
     {/if}
   </div>
 </div>
+
+<svelte:head>
+  <title>{websiteTitle}</title>
+  <meta property="og:title" content={websiteTitle} />
+  <meta property="og:description" content={websiteDescription} />
+  <meta property="og:image" content={imageUrl} />
+  <meta name="theme-color" content={themeColor} />
+  <meta name="twitter:card" content="summary_large_image" />
+</svelte:head>
 
 <style lang="postcss">
   :global(html) {
