@@ -18,11 +18,11 @@
    */
   let error = null;
 
-  // Your existing script code here
-  const websiteTitle = "Your Website Title";
-  const websiteDescription = "A brief description of your website";
+  const websiteTitle = "Weather";
+  const websiteDescription =
+    "A modern weather search made in Svelte + tailwind, utilizing the OpenWeather api.";
   const imageUrl = "https://files.catbox.moe/4uk5s9.png";
-  const themeColor = "#HEX_COLOR";
+  const themeColor = "#000000";
 
   const countries = [
     "US",
