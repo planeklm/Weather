@@ -231,7 +231,7 @@
         <input
           bind:value={city}
           type="text"
-          placeholder="Las Vegas"
+          placeholder="City"
           class="flex font-sans px-4 py-2 w-full sm:w-[200px] bg-gray-50 dark:bg-[#070707] border border-gray-300 dark:border-[#252525] rounded-md focus:outline-none placeholder-gray-500 dark:placeholder-[#a2a2a2] text-gray-900 dark:text-white transition-colors duration-200"
         />
         <select
