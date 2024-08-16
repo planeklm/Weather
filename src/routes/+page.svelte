@@ -28,6 +28,7 @@
     AE: "Abu Dhabi",
     AG: "Saint John's",
     AR: "Buenos Aires",
+    AL: "Tirana",
     AS: "Pago Pago",
     AT: "Vienna",
     AU: "Canberra",
