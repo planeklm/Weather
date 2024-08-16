@@ -200,16 +200,16 @@
   }
 </script>
 
-<div class="flex sm:hidden items-center justify-center min-h-screen w-full" class:dark={$darkMode}>
+<div class="flex sm:hidden items-center justify-center min-h-screen w-full bg-black" class:dark={$darkMode}>
   <div class="text-center">
     <h1
-      class="bg-gradient-to-t from-gray-600 via-gray-900 to-gray-900 dark:from-[#404040] dark:via-[#ffffff] dark:to-[#ffffff] inline-block text-transparent bg-clip-text font-bold font-title text-6xl sm:text-6xl pl-5 pr-5 pb-5"
+      class="bg-gradient-to-t from-[#404040] via-[#ffffff] to-[#ffffff] inline-block text-transparent bg-clip-text font-bold font-title text-6xl sm:text-6xl pl-5 pr-5 pb-5"
       in:fade={{ delay: 100, duration: 250 }}
     >
       🖥️
     </h1>
     <h1
-      class="bg-gradient-to-t from-gray-600 via-gray-900 to-gray-900 dark:from-[#404040] dark:via-[#ffffff] dark:to-[#ffffff] inline-block text-transparent bg-clip-text font-bold font-title text-3xl sm:text-6xl pl-5 pr-5"
+      class="bg-gradient-to-t from-[#404040] via-[#ffffff] to-[#ffffff] inline-block text-transparent bg-clip-text font-bold font-title text-3xl sm:text-6xl pl-5 pr-5"
       in:fade={{ delay: 100, duration: 250 }}
     >
       Weather is not available on mobile devices
