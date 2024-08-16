@@ -3,6 +3,9 @@
   import { fade, fly, slide, crossfade } from "svelte/transition";
   import { quintIn, quintOut, sineOut } from "svelte/easing";
   import { onMount } from "svelte";
+  import { writable } from 'svelte/store';
+
+  const darkMode = writable(true);
 
   /**
    * @type {{ name: any; sys: { country: any; }; main: { temp: number; humidity: any; }; weather: { description: any; }[]; wind: { speed: any; }; } | null}
@@ -191,24 +194,28 @@
       weatherIcon = "material-symbols:emoticon-rounded"; // Default to cloudy if no match
     }
   }
+
+  function toggleTheme() {
+    darkMode.update(n => !n);
+  }
 </script>
 
-<div class="flex sm:hidden items-center justify-center min-h-screen w-full">
+<div class="flex sm:hidden items-center justify-center min-h-screen w-full" class:dark={$darkMode}>
   <div class="text-center">
     <h1
-      class="bg-gradient-to-t from-[#404040] via-[#ffffff] to-[#ffffff] inline-block text-transparent bg-clip-text font-bold font-title text-6xl sm:text-6xl pl-5 pr-5 pb-5"
+      class="bg-gradient-to-t from-gray-600 via-gray-900 to-gray-900 dark:from-[#404040] dark:via-[#ffffff] dark:to-[#ffffff] inline-block text-transparent bg-clip-text font-bold font-title text-6xl sm:text-6xl pl-5 pr-5 pb-5"
       in:fade={{ delay: 100, duration: 250 }}
     >
       🖥️
     </h1>
     <h1
-      class="bg-gradient-to-t from-[#404040] via-[#ffffff] to-[#ffffff] inline-block text-transparent bg-clip-text font-bold font-title text-3xl sm:text-6xl pl-5 pr-5"
+      class="bg-gradient-to-t from-gray-600 via-gray-900 to-gray-900 dark:from-[#404040] dark:via-[#ffffff] dark:to-[#ffffff] inline-block text-transparent bg-clip-text font-bold font-title text-3xl sm:text-6xl pl-5 pr-5"
       in:fade={{ delay: 100, duration: 250 }}
     >
       Weather is not available on mobile devices
     </h1>
     <h1
-      class="text-[#606060] inline-block font-bold font-title text-xl pl-5 pr-5"
+      class="text-gray-500 dark:text-[#606060] inline-block font-bold font-title text-xl pl-5 pr-5"
       in:fade={{ delay: 100, duration: 250 }}
     >
       Please view on a larger display.
@@ -216,24 +223,23 @@
   </div>
 </div>
 
-<div>
+<div class:dark={$darkMode}>
   <div
-    class="flex-1 hidden sm:flex h-screen w-full items-center justify-center space-x-5"
+    class="flex-1 hidden sm:flex h-screen w-full items-center justify-center space-x-5 bg-gray-100 dark:bg-[#070707] transition-colors duration-200"
   >
     <div
-      class="w-[450px] h-[325px] border border-[#252525] rounded-3xl bg-[#111111] flex flex-col items-center justify-between py-6"
+      class="w-[450px] h-[325px] border border-gray-300 dark:border-[#252525] rounded-3xl bg-white dark:bg-[#111111] flex flex-col items-center justify-between py-6 transition-colors duration-200"
     >
       <div class="text-center">
         <Icon
           icon="material-symbols:umbrella-rounded"
-          class="text-[#ffffff] text-8xl mx-auto block"
+          class="text-gray-800 dark:text-[#ffffff] text-8xl mx-auto block"
         />
-        <h1 class="text-[#ffffff] text-[17.5px] font-sans mt-4">
+        <h1 class="text-gray-800 dark:text-[#ffffff] text-[17.5px] font-sans mt-4">
           Select your city and country to view the weather
         </h1>
-        <h1 class="text-[#999999] text-[15px] font-sans mt-2 px-8">
-          Your request will be sent to OpenWeather to recieve the current
-          weather
+        <h1 class="text-gray-600 dark:text-[#999999] text-[15px] font-sans mt-2 px-8">
+          Your request will be sent to OpenWeather to receive the current weather
         </h1>
       </div>
 
@@ -242,13 +248,13 @@
           bind:value={city}
           type="text"
           placeholder="Las Vegas"
-          class="flex font-sans px-4 py-2 w-[200px] bg-[#070707] border border-[#252525] rounded-md focus:outline-none placeholder-[#a2a2a2] text-white transition ease-in-out"
+          class="flex font-sans px-4 py-2 w-[200px] bg-gray-50 dark:bg-[#070707] border border-gray-300 dark:border-[#252525] rounded-md focus:outline-none placeholder-gray-500 dark:placeholder-[#a2a2a2] text-gray-900 dark:text-white transition-colors duration-200"
         />
         <select
           bind:value={selectedCountry}
           id="country"
           name="country"
-          class="flex font-sans px-2 py-3 bg-[#070707] border border-[#252525] rounded-md focus:outline-none placeholder-[#a2a2a2] text-white transition ease-in-out"
+          class="flex font-sans px-2 py-3 bg-gray-50 dark:bg-[#070707] border border-gray-300 dark:border-[#252525] rounded-md focus:outline-none text-gray-900 dark:text-white transition-colors duration-200"
         >
           {#each countries as country}
             <option value={country}>{country}</option>
@@ -256,7 +262,7 @@
         </select>
         <button
           type="submit"
-          class="px-4 py-2 font-sans bg-white text-black rounded-md hover:bg-[#c4c4c4] transition ease-in-out"
+          class="px-4 py-2 font-sans bg-blue-500 dark:bg-white text-white dark:text-black rounded-md hover:bg-blue-600 dark:hover:bg-[#c4c4c4] transition-colors duration-200"
         >
           Search
         </button>
@@ -264,36 +270,36 @@
     </div>
     {#if clicked}
       <div
-        class="w-[250px] h-[325px] border border-[#252525] rounded-3xl bg-[#111111] flex flex-col items-center justify-between py-6"
+        class="w-[250px] h-[325px] border border-gray-300 dark:border-[#252525] rounded-3xl bg-white dark:bg-[#111111] flex flex-col items-center justify-between py-6 transition-colors duration-200"
         in:slide={{ delay: 200, duration: 500, axis: "x" }}
       >
         {#if loading}
           <p
-            class="text-center text-gray-600"
+            class="text-center text-gray-600 dark:text-gray-400"
             in:fly={{ delay: 200, duration: 200 }}
           >
             Loading weather data...
           </p>
         {:else if error}
           <p
-            class="text-center text-red-200 text-lg mx-auto p-5"
+            class="text-center text-red-500 dark:text-red-200 text-lg mx-auto p-5"
             in:fly={{ duration: 200 }}
           >
             <Icon
               icon="material-symbols:error-outline-rounded"
-              class="text-red-200 text-8xl mx-auto"
+              class="text-red-500 dark:text-red-200 text-8xl mx-auto"
             />
             {error}. Please try again.
           </p>
         {:else if weather}
           <h2
-            class="text-xl font-semibold mb-2 text-white"
+            class="text-xl font-semibold mb-2 text-gray-800 dark:text-white"
             in:fly={{ delay: 500, duration: 200 }}
           >
             {weather.name}, {weather.sys.country}
           </h2>
           <p
-            class="text-4xl font-bold mb-2 text-white"
+            class="text-4xl font-bold mb-2 text-gray-800 dark:text-white"
             in:fly={{ delay: 500, duration: 200 }}
           >
             {Math.round(weather.main.temp)}°C
@@ -301,7 +307,7 @@
           <div in:fly={{ delay: 500, duration: 200 }}>
             <Icon
               icon={weatherIcon}
-              class="text-[#ffffff] text-8xl mx-auto block"
+              class="text-gray-800 dark:text-[#ffffff] text-8xl mx-auto block"
             />
           </div>
           <div
@@ -309,14 +315,14 @@
             in:fly={{ delay: 500, duration: 200 }}
           >
             <div>
-              <p class="text-sm text-white">Humidity</p>
-              <p class="font-semibold text-white">
+              <p class="text-sm text-gray-600 dark:text-white">Humidity</p>
+              <p class="font-semibold text-gray-800 dark:text-white">
                 {weather.main.humidity}%
               </p>
             </div>
             <div>
-              <p class="text-sm text-white">Wind Speed</p>
-              <p class="font-semibold text-white">
+              <p class="text-sm text-gray-600 dark:text-white">Wind Speed</p>
+              <p class="font-semibold text-gray-800 dark:text-white">
                 {weather.wind.speed} m/s
               </p>
             </div>
@@ -324,6 +330,12 @@
         {/if}
       </div>
     {/if}
+    <button
+      on:click={toggleTheme}
+      class="absolute top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-[#252525] text-gray-800 dark:text-white transition-colors duration-200"
+    >
+      <Icon icon={$darkMode ? "ph:sun-bold" : "ph:moon-bold"} class="text-2xl" />
+    </button>
   </div>
 </div>
 
@@ -338,6 +350,9 @@
 
 <style lang="postcss">
   :global(html) {
-    background-color: #070707;
+    @apply bg-gray-100 dark:bg-[#070707];
+  }
+  :global(.dark) {
+    color-scheme: dark;
   }
 </style>
